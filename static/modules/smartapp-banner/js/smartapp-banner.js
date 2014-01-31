@@ -7,7 +7,6 @@
 * @api http://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html#searchexamples
 */
 
-
 (function() {
 	/**
 	* Vanilla XMLHttpRequest wrapper
@@ -101,31 +100,52 @@
 	})();
 
 	SmartAppBanner = (function() {
-		/**
-		* Main config
-		*
-		* @todo Expose user defined config
-		*/
-		var LOCALE = navigator.language.split('-')[1].toUpperCase();
-		var API_URL = 'http://itunes.apple.com/lookup?country='+LOCALE+'&id=';
-		var TEMPLATE_NODE = '[data-template=smartapp-banner]';
-		var TEMPLATE_DIR = '/static/modules/smartapp-banner/';
-		var ISANIMATED = true;
-		var VIEW_NODE_HIDDEN = false;
-		var OPEN_NODE_HIDDEN = false;
 
-		// Strings used in the template, default English
-		var STRINGS = {
-			appStoreClaim: 'On the App Store',
-			viewButton: 'view',
-			openButton: 'open'
-		}
-		if (LOCALE == 'ES') {
-			var STRINGS = {
+		/**
+		* Default config totally customizable by using SmartAppBannerConfig object
+		*
+		*/
+		var localConfig = {
+			// Gets browser language for localization and set API to localized iTunes Stores
+			// Uses ISO country codes: http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+			locale: navigator.language.split('-')[1].toUpperCase(),
+			// Template selector
+			tplSelector: '[data-template=smartapp-banner]',
+			// Template location, must be absolute path
+			tplDir: '/static/modules/smartapp-banner/',
+			// Show and hide the SmartAppBanner within animation
+			isAnimated: true,
+			// Shows price in view button instead of localized string
+			showPrice: true,
+			// Enables a custom iTunes Store link (commonly used for link tracking)
+			viewURL: false,
+			// Default (US) strings used in template
+			strings: {
+				appStoreClaim: 'On the App Store',
+				viewButton: 'view',
+				openButton: 'open'
+			},
+			// Spanish (ES) localized strings
+			strings_ES: {
 				appStoreClaim: 'En la App Store',
 				viewButton: 'ver',
 				openButton: 'abrir'
 			}
+		}
+
+		// Override local config with userConfig
+		if (typeof SmartAppBannerConfig == 'object') {
+			for (var i in SmartAppBannerConfig) {
+				localConfig[i] = SmartAppBannerConfig[i]
+			}
+		}
+
+		// Set API location
+		localConfig.api = 'http://itunes.apple.com/lookup?country='+localConfig.locale+'&id=';
+
+		// Apply localized strings
+		if (localConfig.locale == 'ES') {
+			localConfig.strings = localConfig.strings_ES;
 		}
 
 		return {
@@ -162,7 +182,7 @@
 			* @return Object
 			*/
 			getData: function(appID, callback) {
-				loadJSONP(API_URL+appID,
+				loadJSONP(localConfig.api+appID,
 					 function(data) {
 					 	if (typeof callback == 'function') {
 							callback(data)
@@ -183,7 +203,7 @@
 					price: metadata.formattedPrice,
 					averageUserRating: parseInt(metadata.averageUserRating),
 					userRatingCount: metadata.userRatingCount,
-					viewUrl: metadata.trackViewUrl,
+					viewUrl: (!localConfig.viewURL) ? metadata.trackViewUrl : localConfig.viewURL,
 					openUrl: metadata.openUrl,
 					viewNodeIsHidden: (metadata.viewNodeIsHidden) ? 'hidden' : '',
 					openNodeIsHidden: (metadata.openNodeIsHidden) ? 'hidden' : '',
@@ -192,7 +212,6 @@
 					openString: metadata.openString,
 					appStoreString: metadata.appStoreString
 				}
-
 				for ( var i in info ) {
 					var key = i;
 					var value = (typeof info[i] == 'undefined') ? '' : info[i];
@@ -201,7 +220,7 @@
 				return template;
 			},
 			hide: function(isAnimated) {
-				var banner = document.body.querySelector(TEMPLATE_NODE);
+				var banner = document.body.querySelector(localConfig.tplSelector);
 				if (isAnimated) {
 					document.body.classList.remove('sab-active');
 					banner.setAttribute('hidden', '');
@@ -218,7 +237,7 @@
 			*
 			*/
 			show: function(isAnimated) {
-				var banner = document.body.querySelector(TEMPLATE_NODE);
+				var banner = document.body.querySelector(localConfig.tplSelector);
 
 				if (isAnimated) {
 					var delay = setTimeout(function() {
@@ -236,12 +255,12 @@
 			*/
 			bindEvents: function() {
 				var context = this;
-				var banner = document.body.querySelector(TEMPLATE_NODE);
+				var banner = document.body.querySelector(localConfig.tplSelector);
 
 				// Hide banner from close icon
 				var closeButton = banner.querySelector('[data-trigger=close]');
 				closeButton.addEventListener('click', function(e) {
-					context.hide(ISANIMATED);
+					context.hide(localConfig.isAnimated);
 					e.preventDefault();
 				});
 			},
@@ -259,25 +278,15 @@
 					var info = response.results[0];
 					info.openUrl = config.appArgs;
 					info.appID = config.appID;
-					info.appStoreString = STRINGS.appStoreClaim;
-					info.viewString = info.formattedPrice;
-					info.openString = STRINGS.openButton;
+					info.appStoreString = localConfig.strings.appStoreClaim;
+					info.viewString = (localConfig.showPrice) ? info.formattedPrice: localConfig.strings.viewButton;
+					info.openString = localConfig.strings.openButton;
 
 					// Switch view/open
 					if (typeof info.openUrl == 'undefined') {
 						info.openNodeIsHidden = true;
 					} else {
 						info.viewNodeIsHidden = true;
-					}
-
-					// Force hide view
-					if (VIEW_NODE_HIDDEN) {
-						info.viewNodeIsHidden = true;
-					}
-
-					// Force hide open
-					if (OPEN_NODE_HIDDEN) {
-						info.openNodeIsHidden = true;
 					}
 
 					// Not rated
@@ -287,13 +296,13 @@
 
 					// Load template from dir
 					http({
-						url: TEMPLATE_DIR+'template.html',
+						url: localConfig.tplDir+'template.html',
 						success: function(tpl) {
 							// Parse data and append element
 							var banner = context.parseData(info, tpl);
 							document.body.insertAdjacentHTML('afterbegin', banner);
 							context.bindEvents();
-							context.show(ISANIMATED);
+							context.show(localConfig.isAnimated);
 						}
 					});
 				});
