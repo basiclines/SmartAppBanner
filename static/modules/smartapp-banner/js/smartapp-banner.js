@@ -106,13 +106,28 @@
 		*
 		* @todo Expose user defined config
 		*/
-		var LOCALE = navigator.language.split('-')[1];
+		var LOCALE = navigator.language.split('-')[1].toUpperCase();
 		var API_URL = 'http://itunes.apple.com/lookup?country='+LOCALE+'&id=';
 		var TEMPLATE_NODE = '[data-template=smartapp-banner]';
 		var TEMPLATE_DIR = '/static/modules/smartapp-banner/';
 		var ISANIMATED = true;
 		var VIEW_NODE_HIDDEN = false;
 		var OPEN_NODE_HIDDEN = false;
+
+		// Strings used in the template, default English
+		var STRINGS = {
+			appStoreClaim: 'On the App Store',
+			viewButton: 'view',
+			openButton: 'open'
+		}
+		if (LOCALE == 'ES') {
+			var STRINGS = {
+				appStoreClaim: 'En la App Store',
+				viewButton: 'ver',
+				openButton: 'abrir'
+			}
+		}
+
 		return {
 			/**
 			* Obtains appID and extra config for setup
@@ -244,9 +259,9 @@
 					var info = response.results[0];
 					info.openUrl = config.appArgs;
 					info.appID = config.appID;
-					info.appStoreString = 'On the App Store';
-					info.viewString = 'view';
-					info.openString = 'open';
+					info.appStoreString = STRINGS.appStoreClaim;
+					info.viewString = STRINGS.viewButton;
+					info.openString = STRINGS.openButton;
 
 					// Switch view/open
 					if (typeof info.openUrl == 'undefined') {
