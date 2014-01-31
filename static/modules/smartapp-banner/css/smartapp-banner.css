@@ -1,0 +1,130 @@
+/**
+* iOS Smart App Banner replacement with web technologies
+*
+* @version 1.0
+* @based https://github.com/ijason/Smart-App-Banners/blob/master/css/smart-app-banner.css
+* @inspired http://dribbble.com/shots/1329306-Smart-App-Banner-mockup-PSD
+* @reference https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html#//apple_ref/doc/uid/TP40002051-CH6-SW1
+*/
+
+.smartapp-banner {
+	font-family: Helvetica Neue, Sans-serif;
+	color: #333;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-user-select: none;
+	background: rgba(255, 255, 255, 0.95);
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 2147483547; /* Max allowed z-index - 100 */
+	-webkit-box-sizing: border-box;
+	padding: 8px 8px 8px 32px;
+}
+	/* Outer border */
+	.smartapp-banner:after {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		height: 1px;
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+	/* UI Sprite load */
+	.sab-icon { background: url(../gphx/ui.sprite.png) no-repeat left top; background-size: 160px; font: 0/0 a; }
+
+	/* Close */
+	.sab-icon_close {
+		position: absolute;
+		left: 8px;
+		top: 50%;
+		width: 16px;
+		height: 16px;
+		margin-top: -8px;
+		background-position: -6px -6px;
+		-webkit-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+	}
+	.sab-icon_close:hover,
+	.sab-icon_close:active { opacity: 0.8; }
+
+	/* Menu */
+	.sab-menu { float: right; }
+		.sab-menu .sab-menu_item { margin-bottom: 8px; }
+		.sab-menu .sab-menu_item:last-child { margin: 0; }
+
+		/* Action */
+		.sab-action {
+			display: block;
+			font: 14px/26px HelveticaNeue-Medium, Helvetica Neue Medium, Helvetica Neue, Sans-serif;
+			text-transform: uppercase;
+			text-decoration: none;
+			color: #333;
+			border: solid 1px #333;
+			border-radius: 4px;
+			padding: 0 12px;
+			min-width: 21px;
+			-webkit-transition: all 0.3s ease;
+			transition: all 0.3s ease;
+		}
+		.sab-action_view { border-color: #4cd964; color: #4cd964; }
+		.sab-action_open { border-color: #5ac8fa; color: #5ac8fa; }
+
+		.sab-action:hover,
+		.sab-action:active { text-decoration: none; opacity: 0.6; }
+
+	/* App Icon */
+	.sab-appicon {
+		width: 60px;
+		height: 60px;
+		float: left;
+		margin-right: 8px;
+		overflow: hidden;
+		border-radius: 16px;
+	}
+		.sab-appicon img { width: 100%; height: 100%; }
+
+	/* Info */
+	.sab-info { display: block; overflow: hidden; text-align: left; padding: 4px 8px 4px 0; }
+		.sab-info_item { white-space: nowrap; display: block; overflow: hidden; text-overflow: ellipsis; }
+
+		.sab-appname { font: 13px/1.5em HelveticaNeue-Medium, Helvetica Neue Medium, Helvetica Neue, Sans-serif; color: rgba(0, 0, 0, 0.9); }
+
+		/* Rating and price */
+		.sab-rating,
+		.sab-store {
+			font-size: 10px;
+			font-weight: normal;
+			line-height: 1.5em;
+			color: rgba(0, 0, 0, 0.5);
+		}
+			/* Price */
+			.sab-store_price { text-transform: uppercase; font-weight: normal; }
+			.sab-icon_go {
+				display: inline-block;
+				vertical-align: middle;
+				width: 3px;
+				height: 6px;
+				-webkit-margin-before: -2px;
+				background-position: -12px -28px;
+			}
+
+			/* Rating icons */
+			.sab-icon_rating {
+				width: 54px;
+				height: 9px;
+				display: inline-block;
+				vertical-align: middle;
+				-webkit-margin-before: -2px;
+				background-position: -38px -68px;
+			}
+			.sab-icon_rating_5 { background-position: -38px -10px; }
+			.sab-icon_rating_4 { background-position: -38px -21px; }
+			.sab-icon_rating_3 { background-position: -38px -33px; }
+			.sab-icon_rating_2 { background-position: -38px -45px; }
+			.sab-icon_rating_1 { background-position: -38px -57px; }
+			.sab-icon_rating_0 { background-position: -38px -68px; }
