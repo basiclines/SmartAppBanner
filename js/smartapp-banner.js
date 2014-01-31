@@ -158,7 +158,7 @@
 				* @prop String appArgs
 			*/
 			getConfig: function() {
-				var metatag = document.querySelector('meta[name=apple-itunes-app]');
+				var metatag = document.querySelector('meta[name=apple-itunes-app-webversion]');
 				if (metatag) {
 					var content = metatag.getAttribute('content').split(',');
 					for (var i in content) {
