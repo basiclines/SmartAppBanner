@@ -260,7 +260,7 @@
 					info.openUrl = config.appArgs;
 					info.appID = config.appID;
 					info.appStoreString = STRINGS.appStoreClaim;
-					info.viewString = STRINGS.viewButton;
+					info.viewString = info.formattedPrice;
 					info.openString = STRINGS.openButton;
 
 					// Switch view/open
