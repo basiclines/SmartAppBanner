@@ -25,12 +25,16 @@
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
+
+/* Hidden scenarios */
 .smartapp-banner[hidden] {
 	-webkit-transform: translate3d(0, -100%, 0);
 	transform: translateY(-100%);
 	opacity: 0;
 	pointer-events: none;
 }
+.smartapp-banner [hidden] { display: none!important; }
+
 	/* Outer border */
 	.smartapp-banner:after {
 		content: "";
@@ -68,7 +72,7 @@
 		/* Action */
 		.sab-action {
 			display: block;
-			font: 14px/26px HelveticaNeue-Medium, Helvetica Neue Medium, Helvetica Neue, Sans-serif;
+			font: 12px/24px HelveticaNeue-Bold, Helvetica Neue Bold, Helvetica Neue, Sans-serif;
 			text-transform: uppercase;
 			text-decoration: none;
 			color: #333;
@@ -76,6 +80,7 @@
 			border-radius: 4px;
 			padding: 0 12px;
 			min-width: 21px;
+			height: 24px;
 			-webkit-transition: all 0.3s ease;
 			transition: all 0.3s ease;
 		}

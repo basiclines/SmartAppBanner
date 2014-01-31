@@ -2,8 +2,8 @@
 	<button class="sab-icon sab-icon_close">Close</button>
 	<menu type="toolbar" class="sab-menu">
 		<ul>
-			<li class="sab-menu_item"><a class="sab-action sab-action_view" href="{_buyUrl_}" title="{_appStoreString_}">{_viewString_}</a></li>
-			<li class="sab-menu_item"><a class="sab-action sab-action_open" href="{_openUrl_}" title="{_openString_} {_name_}">{_openString_}</a></li>
+			<li class="sab-menu_item" data-trigger="view" {_viewNodeIsHidden_}><a class="sab-action sab-action_view" href="{_viewUrl_}" title="{_appStoreString_}">{_viewString_}</a></li>
+			<li class="sab-menu_item" data-trigger="open" {_openNodeIsHidden_}><a class="sab-action sab-action_open" href="{_openUrl_}" title="{_openString_} {_name_}">{_openString_}</a></li>
 		</ul>
 	</menu>
 	<figure class="sab-appicon">
@@ -11,7 +11,7 @@
 	</figure>
 	<section class="sab-info">
 		<h1 class="sab-info_item sab-appname">{_name_}</h1>
-		<p class="sab-info_item sab-rating"><em class="sab-icon sab-icon_rating sab-icon_rating_{_averageUserRating_}">{_averageUserRating_}</em> <span>({_userRatingCount_})</span></p>
+		<p class="sab-info_item sab-rating" {_ratingNodeIsHidden_}><em class="sab-icon sab-icon_rating sab-icon_rating_{_averageUserRating_}">{_averageUserRating_}</em> <span>({_userRatingCount_})</span></p>
 		<p class="sab-info_item sab-store"><strong class="sab-store_price">{_price_}</strong> - {_appStoreString_} <i class="sab-icon sab-icon_go">></i></p>
 	</section>
 </aside>

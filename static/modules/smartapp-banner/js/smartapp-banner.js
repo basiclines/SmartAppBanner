@@ -106,6 +106,8 @@
 		var TEMPLATE_NODE = '[data-template=smartapp-banner]';
 		var TEMPLATE_DIR = '/static/modules/smartapp-banner/';
 		var ISANIMATED = true;
+		var VIEW_NODE_HIDDEN = false;
+		var OPEN_NODE_HIDDEN = false;
 		return {
 			/**
 			* Obtains appID and extra config for setup
@@ -161,8 +163,11 @@
 					price: metadata.formattedPrice,
 					averageUserRating: parseInt(metadata.averageUserRating),
 					userRatingCount: metadata.userRatingCount,
-					buyUrl: metadata.trackViewUrl,
+					viewUrl: metadata.trackViewUrl,
 					openUrl: metadata.openUrl,
+					viewNodeIsHidden: (metadata.viewNodeIsHidden) ? 'hidden' : '',
+					openNodeIsHidden: (metadata.openNodeIsHidden) ? 'hidden' : '',
+					ratingNodeIsHidden: (metadata.ratingNodeIsHidden) ? 'hidden' : '',
 					viewString: metadata.viewString,
 					openString: metadata.openString,
 					appStoreString: metadata.appStoreString
@@ -181,6 +186,7 @@
 			*/
 			show: function(isAnimated) {
 				var banner = document.querySelector(TEMPLATE_NODE);
+
 				if (isAnimated) {
 					var delay = setTimeout(function() {
 						banner.removeAttribute('hidden');
@@ -202,9 +208,25 @@
 					// Add extra data
 					var info = response.results[0];
 					info.openUrl = config.appArgs;
+					info.appID = config.appID;
 					info.appStoreString = 'On the App Store';
 					info.viewString = 'view';
 					info.openString = 'open';
+
+					// Force hide view
+					if (VIEW_NODE_HIDDEN) {
+						info.viewNodeIsHidden = true;
+					}
+
+					// Not found app-argument in metatag or force hide
+					if (typeof info.openUrl == 'undefined' || OPEN_NODE_HIDDEN) {
+						info.openNodeIsHidden = true;
+					}
+
+					// Not rated
+					if (typeof info.averageUserRating == 'undefined') {
+						info.ratingNodeIsHidden = true;
+					}
 
 					var localTemplate = document.querySelector(TEMPLATE_NODE);
 					if (localTemplate) {
