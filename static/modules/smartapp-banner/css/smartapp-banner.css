@@ -37,6 +37,9 @@
 }
 .smartapp-banner [hidden] { display: none!important; }
 
+/* Page active */
+.sab-active {  }
+
 	/* Outer border */
 	.smartapp-banner:after {
 		content: "";
@@ -68,29 +71,28 @@
 
 	/* Menu */
 	.sab-menu { float: right; }
-		.sab-menu .sab-menu_item { margin-bottom: 8px; }
-		.sab-menu .sab-menu_item:last-child { margin: 0; }
+			.sab-menu .sab-menu_item { margin-top: 18px; }
 
-		/* Action */
-		.sab-action {
-			display: block;
-			font: 12px/24px HelveticaNeue-Bold, Helvetica Neue Bold, Helvetica Neue, Sans-serif;
-			text-transform: uppercase;
-			text-decoration: none;
-			color: #333;
-			border: solid 1px #333;
-			border-radius: 4px;
-			padding: 0 12px;
-			min-width: 21px;
-			height: 24px;
-			-webkit-transition: all 0.3s ease;
-			transition: all 0.3s ease;
-		}
-		.sab-action_view { border-color: #4cd964; color: #4cd964; }
-		.sab-action_open { border-color: #5ac8fa; color: #5ac8fa; }
+	/* Action */
+	.sab-action {
+		display: block;
+		font: 12px/24px HelveticaNeue-Bold, Helvetica Neue Bold, Helvetica Neue, Sans-serif;
+		text-transform: uppercase;
+		text-decoration: none;
+		color: #333;
+		border: solid 1px #333;
+		border-radius: 4px;
+		padding: 0 12px;
+		min-width: 21px;
+		height: 24px;
+		-webkit-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+	}
+	.sab-action_view { border-color: #4cd964; color: #4cd964; }
+	.sab-action_open { border-color: #5ac8fa; color: #5ac8fa; }
 
-		.sab-action:hover,
-		.sab-action:active { text-decoration: none; opacity: 0.6; }
+	.sab-action:hover,
+	.sab-action:active { text-decoration: none; opacity: 0.6; }
 
 	/* App Icon */
 	.sab-appicon {

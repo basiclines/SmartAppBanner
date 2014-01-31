@@ -188,8 +188,10 @@
 			hide: function(isAnimated) {
 				var banner = document.body.querySelector(TEMPLATE_NODE);
 				if (isAnimated) {
+					document.body.classList.remove('sab-active');
 					banner.setAttribute('hidden', '');
 				} else {
+					document.body.classList.remove('sab-active');
 					banner.style.transition = 'none';
 					banner.style.webkitTransition = 'none';
 					banner.setAttribute('hidden', '');
@@ -205,9 +207,11 @@
 
 				if (isAnimated) {
 					var delay = setTimeout(function() {
+						document.body.classList.add('sab-active');
 						banner.removeAttribute('hidden');
 					}, 70);
 				} else {
+					document.body.classList.add('sab-active');
 					banner.removeAttribute('hidden');
 				}
 			},
@@ -244,13 +248,20 @@
 					info.viewString = 'view';
 					info.openString = 'open';
 
+					// Switch view/open
+					if (typeof info.openUrl == 'undefined') {
+						info.openNodeIsHidden = true;
+					} else {
+						info.viewNodeIsHidden = true;
+					}
+
 					// Force hide view
 					if (VIEW_NODE_HIDDEN) {
 						info.viewNodeIsHidden = true;
 					}
 
-					// Not found app-argument in metatag or force hide
-					if (typeof info.openUrl == 'undefined' || OPEN_NODE_HIDDEN) {
+					// Force hide open
+					if (OPEN_NODE_HIDDEN) {
 						info.openNodeIsHidden = true;
 					}
 
