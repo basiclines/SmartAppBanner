@@ -303,7 +303,7 @@
 
 	// Run Smart App Banner only for iPhone OS Browsers
 	// Use system.mobile for desktop testing with 320px viewport
-	if (system.mobile) {
+	if (system.ios) {
 		SmartAppBanner.init();
 	}
 
