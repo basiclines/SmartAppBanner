@@ -270,26 +270,17 @@
 						info.ratingNodeIsHidden = true;
 					}
 
-					var localTemplate = document.body.querySelector(TEMPLATE_NODE);
-					if (localTemplate) {
-						// Use template from page
-						var banner = localTemplate;
-						banner.outerHTML = this.parseData(info, localTemplate);
-						this.bindEvents();
-						this.show(ISANIMATED);
-					} else {
-						// Load template from dir
-						http({
-							url: TEMPLATE_DIR+'template.html',
-							success: function(tpl) {
-								// Parse data and append element
-								var banner = context.parseData(info, tpl);
-								document.body.insertAdjacentHTML('afterbegin', banner);
-								context.bindEvents();
-								context.show(ISANIMATED);
-							}
-						});
-					}
+					// Load template from dir
+					http({
+						url: TEMPLATE_DIR+'template.html',
+						success: function(tpl) {
+							// Parse data and append element
+							var banner = context.parseData(info, tpl);
+							document.body.insertAdjacentHTML('afterbegin', banner);
+							context.bindEvents();
+							context.show(ISANIMATED);
+						}
+					});
 				});
 			}
 		}
