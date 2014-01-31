@@ -41,6 +41,7 @@
 .sab-active {
 	-webkit-transform: translate3d(0, 76px, 0);
 	transform: translate3d(0, 76px, 0);
+	margin: 0;
 }
 
 	/* Outer border */
@@ -55,10 +56,12 @@
 	}
 
 	/* UI Sprite load */
-	.sab-icon { background: url(../gphx/ui.sprite.png) no-repeat left top; background-size: 160px; font: 0/0 a; }
+	.sab-icon { background: url(../gphx/ui.sprite.png) no-repeat left top; background-size: 160px; font: 0/0 a; margin: 0; padding: 0; }
 
 	/* Close */
 	.sab-icon_close {
+		border: none;
+		cursor: pointer;
 		position: absolute;
 		left: 5px;
 		top: 50%;
@@ -73,8 +76,9 @@
 	.sab-icon_close:active { opacity: 0.8; }
 
 	/* Menu */
-	.sab-menu { float: right; }
-			.sab-menu .sab-menu_item { margin-top: 18px; }
+	.sab-menu { float: right; margin: 0; padding: 0; }
+			.sab-menu ul { padding: 0; list-style: none; }
+			.sab-menu .sab-menu_item { margin: 18px 0 0; }
 
 	/* Action */
 	.sab-action {
@@ -92,7 +96,7 @@
 		transition: all 0.3s ease;
 	}
 	.sab-action_view { border-color: #4cd964; color: #4cd964; }
-	.sab-action_open { border-color: #5ac8fa; color: #5ac8fa; }
+	.sab-action_open { border-color: #007aff; color: #007aff; }
 
 	.sab-action:hover,
 	.sab-action:active { text-decoration: none; opacity: 0.6; }
@@ -102,7 +106,8 @@
 		width: 60px;
 		height: 60px;
 		float: left;
-		margin-right: 8px;
+		margin: 0 8px 0 0;
+		padding: 0;
 		overflow: hidden;
 		border-radius: 16px;
 		position: relative;
@@ -121,8 +126,20 @@
 		}
 
 	/* Info */
-	.sab-info { display: block; overflow: hidden; text-align: left; padding: 4px 8px 4px 0; }
-		.sab-info_item { white-space: nowrap; display: block; overflow: hidden; text-overflow: ellipsis; }
+	.sab-info {
+		display: block;
+		overflow: hidden;
+		text-align: left;
+		margin: 0;
+		padding: 4px 8px 4px 0;
+	}
+		.sab-info_item {
+			white-space: nowrap;
+			display: block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			margin: 0;
+		}
 
 		.sab-appname { font: 13px/1.5em HelveticaNeue-Medium, Helvetica Neue Medium, Helvetica Neue, Sans-serif; color: rgba(0, 0, 0, 0.9); }
 

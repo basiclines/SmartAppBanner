@@ -111,8 +111,8 @@
 			locale: navigator.language.split('-')[1].toUpperCase(),
 			// Template selector
 			tplSelector: '[data-template=smartapp-banner]',
-			// Template location, must be absolute path
-			tplDir: '/static/modules/smartapp-banner/',
+			// Template location, must be an absolute path
+			tplDir: '',
 			// Show and hide the SmartAppBanner within animation
 			isAnimated: true,
 			// Shows price in view button instead of localized string
@@ -300,6 +300,13 @@
 						success: function(tpl) {
 							// Parse data and append element
 							var banner = context.parseData(info, tpl);
+							document.body.insertAdjacentHTML('afterbegin', banner);
+							context.bindEvents();
+							context.show(localConfig.isAnimated);
+						},
+						error: function(error, response) {
+							// Error callback triggered in lack of webserver
+							var banner = context.parseData(info, response);
 							document.body.insertAdjacentHTML('afterbegin', banner);
 							context.bindEvents();
 							context.show(localConfig.isAnimated);
