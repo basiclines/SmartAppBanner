@@ -45,7 +45,6 @@
 		if (req.readyState == 4) return;
 		req.send(config.data);
 	};
-
 	/**
 	* Load JSONP utility
 	*
@@ -54,7 +53,6 @@
 	* @param Function callback
 	* @param Object context
 	*/
-
 	var loadJSONP = (function() {
 		var unique = 0;
 		return function(url, callback, context) {
@@ -77,12 +75,37 @@
 			document.getElementsByTagName('head')[0].appendChild(script);
 		};
 	})();
+	/**
+	* System sniffing utility
+	*
+	* @return Object
+		* @prop Bool ios
+		* @prop Bool android
+		* @prop Bool mobile
+	*/
+	var system = (function() {
+		var obj = {
+			ios: false,
+			android: false,
+			mobile: false
+		};
+		var iOS = (navigator.userAgent.search("Mobile") != -1 && navigator.userAgent.search("iPhone OS") != -1);
+		var Android = (navigator.userAgent.search("Mobile") != -1 && navigator.userAgent.search("Android") != -1);
+		var isMobile = (Android || iOS || window.innerWidth < 480);
+
+		if (iOS) { obj.ios = true }
+		if (Android) { obj.android = true }
+		if (isMobile) { obj.mobile = true }
+
+		return obj;
+	})();
 
 	SmartAppBanner = (function() {
 		var LOCALE = 'ES';
 		var API_URL = 'http://itunes.apple.com/lookup?country='+LOCALE+'&id=';
 		var TEMPLATE_NODE = '[data-template=smartapp-banner]';
 		var TEMPLATE_DIR = '/static/modules/smartapp-banner/';
+		var ISANIMATED = true;
 		return {
 			/**
 			* Obtains appID and extra config for setup
@@ -153,10 +176,24 @@
 				return template;
 			},
 			/**
+			* Shows rendered Smart App Banner
+			*
+			*/
+			show: function(isAnimated) {
+				var banner = document.querySelector(TEMPLATE_NODE);
+				if (isAnimated) {
+					var delay = setTimeout(function() {
+						banner.removeAttribute('hidden');
+					}, 70);
+				} else {
+					banner.removeAttribute('hidden');
+				}
+			},
+			/**
 			* Initializes Smart App Banner
 			*
 			*/
-			init: function() {
+			init: function(options) {
 				var config = this.getConfig();
 				var context = this;
 
@@ -172,7 +209,9 @@
 					var localTemplate = document.querySelector(TEMPLATE_NODE);
 					if (localTemplate) {
 						// Use template from page
-						document.body.insertAdjacentHTML('afterbegin', localTemplate);
+						var banner = localTemplate;
+						banner.outerHTML = this.parseData(info, localTemplate);
+						this.show(ISANIMATED);
 					} else {
 						// Load template from dir
 						http({
@@ -181,6 +220,7 @@
 								// Parse data and append element
 								var banner = context.parseData(info, tpl);
 								document.body.insertAdjacentHTML('afterbegin', banner);
+								context.show(ISANIMATED);
 							}
 						});
 					}
@@ -188,5 +228,12 @@
 			}
 		}
 	})();
-	SmartAppBanner.init();
+
+	// Run Smart App Banner only for iPhone OS Browsers
+	// Use system.mobile for desktop testing with 320px viewport
+	if (system.mobile) {
+		var options = (typeof SmartAppBanner.options == 'object') ? SmartAppBanner.options : {};
+		SmartAppBanner.init(options);
+	}
+
 })();
