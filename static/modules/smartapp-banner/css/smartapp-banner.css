@@ -14,6 +14,8 @@
 	-webkit-text-size-adjust: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
 	background: rgba(255, 255, 255, 0.95);
 	position: absolute;
 	left: 0;
@@ -52,12 +54,12 @@
 	/* Close */
 	.sab-icon_close {
 		position: absolute;
-		left: 8px;
+		left: 5px;
 		top: 50%;
-		width: 16px;
-		height: 16px;
-		margin-top: -8px;
-		background-position: -6px -6px;
+		width: 22px;
+		height: 22px;
+		margin-top: -11px;
+		background-position: -3px -3px;
 		-webkit-transition: all 0.3s ease;
 		transition: all 0.3s ease;
 	}
