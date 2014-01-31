@@ -1,7 +1,0 @@
-#!/bin/bash
-
-#Requires: Node module cleancss https://github.com/GoalSmashers/clean-css
-#Requires: Node module uglifyjs https://github.com/mishoo/UglifyJS2
-
-cleancss -o 'css/smartapp-banner.min.css' 'css/smartapp-banner.css'
-uglifyjs 'js/smartapp-banner.js' -o 'js/smartapp-banner.min.js'
