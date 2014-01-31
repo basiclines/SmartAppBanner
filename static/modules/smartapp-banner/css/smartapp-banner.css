@@ -20,7 +20,7 @@
 	position: absolute;
 	left: 0;
 	right: 0;
-	top: 0;
+	top: -76px;
 	z-index: 2147483547; /* Max allowed z-index - 100 */
 	-webkit-box-sizing: border-box;
 	padding: 8px 8px 8px 32px;
@@ -38,7 +38,10 @@
 .smartapp-banner [hidden] { display: none!important; }
 
 /* Page active */
-.sab-active {  }
+.sab-active {
+	-webkit-transform: translate3d(0, 76px, 0);
+	transform: translate3d(0, 76px, 0);
+}
 
 	/* Outer border */
 	.smartapp-banner:after {
