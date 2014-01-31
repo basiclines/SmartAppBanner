@@ -101,7 +101,12 @@
 	})();
 
 	SmartAppBanner = (function() {
-		var LOCALE = 'ES';
+		/**
+		* Main config
+		*
+		* @todo Expose user defined config
+		*/
+		var LOCALE = navigator.language.split('-')[1];
 		var API_URL = 'http://itunes.apple.com/lookup?country='+LOCALE+'&id=';
 		var TEMPLATE_NODE = '[data-template=smartapp-banner]';
 		var TEMPLATE_DIR = '/static/modules/smartapp-banner/';
@@ -282,8 +287,7 @@
 	// Run Smart App Banner only for iPhone OS Browsers
 	// Use system.mobile for desktop testing with 320px viewport
 	if (system.mobile) {
-		var options = (typeof SmartAppBanner.options == 'object') ? SmartAppBanner.options : {};
-		SmartAppBanner.init(options);
+		SmartAppBanner.init();
 	}
 
 })();

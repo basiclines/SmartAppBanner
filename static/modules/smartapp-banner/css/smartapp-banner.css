@@ -100,8 +100,20 @@
 		margin-right: 8px;
 		overflow: hidden;
 		border-radius: 16px;
+		position: relative;
 	}
 		.sab-appicon img { width: 100%; height: 100%; }
+		.sab-appicon:before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			border: solid 1px rgba(0, 0, 0, 0.05);
+			border-radius: 16px;
+			pointer-events: none;
+		}
 
 	/* Info */
 	.sab-info { display: block; overflow: hidden; text-align: left; padding: 4px 8px 4px 0; }
