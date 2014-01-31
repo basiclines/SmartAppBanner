@@ -14,7 +14,7 @@ Native Smart App Banner for iOS is too limitated in certain aspects:
 
 How?
 ==============
-**Live example** (open from iOS device) http://meetsapp.github.io/SmartAppBanner
+**Live example** (open from iOS device) http://meetsapp.github.io/SmartAppBanner/example.html
 
 Uses **iTunes affiliate API** to provide all necesary information, full docs at:
 http://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html#searchexamples
@@ -32,10 +32,15 @@ Add needed resources:
 <link rel="stylesheet" href="css/smartapp-banner.min.css">
 <script type="text/javascript" src="js/smartapp-banner.min.js" charset="utf-8" async defer></script>
 ```
-Then choose your `metatag`:
+Remember `viewport metatag`:
+```html
+<meta name = "viewport" content = "width = device-width, user-scalable =no" >
+``
+Then setup your SmartAppBanner `metatag`:
 
 View in App Store:
 ```html
+<meta name = "viewport" content = "width = device-width, user-scalable =no" >
 <meta name="apple-itunes-app-webversion" content="app-id=595441007">
 ```
 Open app with params:
@@ -45,7 +50,7 @@ Open app with params:
 
 Live example
 ==============
-Access from an iOS device at http://meetsapp.github.io/SmartAppBanner
+Access from an iOS device at http://meetsapp.github.io/SmartAppBanner/example.html
 
 To do
 ==============
