@@ -180,12 +180,23 @@
 				}
 				return template;
 			},
+			hide: function(isAnimated) {
+				var banner = document.body.querySelector(TEMPLATE_NODE);
+				if (isAnimated) {
+					banner.setAttribute('hidden', '');
+				} else {
+					banner.style.transition = 'none';
+					banner.style.webkitTransition = 'none';
+					banner.setAttribute('hidden', '');
+				}
+
+			},
 			/**
 			* Shows rendered Smart App Banner
 			*
 			*/
 			show: function(isAnimated) {
-				var banner = document.querySelector(TEMPLATE_NODE);
+				var banner = document.body.querySelector(TEMPLATE_NODE);
 
 				if (isAnimated) {
 					var delay = setTimeout(function() {
@@ -194,6 +205,21 @@
 				} else {
 					banner.removeAttribute('hidden');
 				}
+			},
+			/**
+			* Set needed UI event handlers
+			*
+			*/
+			bindEvents: function() {
+				var context = this;
+				var banner = document.body.querySelector(TEMPLATE_NODE);
+
+				// Hide banner from close icon
+				var closeButton = banner.querySelector('[data-trigger=close]');
+				closeButton.addEventListener('click', function(e) {
+					context.hide(ISANIMATED);
+					e.preventDefault();
+				});
 			},
 			/**
 			* Initializes Smart App Banner
@@ -228,11 +254,12 @@
 						info.ratingNodeIsHidden = true;
 					}
 
-					var localTemplate = document.querySelector(TEMPLATE_NODE);
+					var localTemplate = document.body.querySelector(TEMPLATE_NODE);
 					if (localTemplate) {
 						// Use template from page
 						var banner = localTemplate;
 						banner.outerHTML = this.parseData(info, localTemplate);
+						this.bindEvents();
 						this.show(ISANIMATED);
 					} else {
 						// Load template from dir
@@ -242,6 +269,7 @@
 								// Parse data and append element
 								var banner = context.parseData(info, tpl);
 								document.body.insertAdjacentHTML('afterbegin', banner);
+								context.bindEvents();
 								context.show(ISANIMATED);
 							}
 						});
