@@ -2,7 +2,7 @@ SmartAppBanner
 ==============
 
 iOS Smart App Banner polyfill based on web technologies
-![Alt text](/example.png "Smart App Banner")
+![Alt text](http://meetsapp.github.io/SmartAppBanner/example.png "Smart App Banner")
 
 Why?
 ==============
@@ -32,17 +32,19 @@ Add needed resources:
 <link rel="stylesheet" href="css/smartapp-banner.min.css">
 <script type="text/javascript" src="js/smartapp-banner.min.js" charset="utf-8" async defer></script>
 ```
+
 Remember `viewport metatag`:
 ```html
-<meta name = "viewport" content = "width = device-width, user-scalable =no" >
-``
+<meta name="viewport" content="width=device-width, user-scalable=no" >
+```
+
 Then setup your SmartAppBanner `metatag`:
 
 View in App Store:
 ```html
-<meta name = "viewport" content = "width = device-width, user-scalable =no" >
 <meta name="apple-itunes-app-webversion" content="app-id=595441007">
 ```
+
 Open app with params:
 ```html
 <meta name="apple-itunes-app-webversion" content="app-id=595441007, app-argument=yourapp://yourparams">
