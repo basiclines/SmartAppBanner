@@ -50,6 +50,43 @@ Open app with params:
 <meta name="apple-itunes-app-webversion" content="app-id=595441007, app-argument=yourapp://yourparams">
 ```
 
+Options
+==============
+There are some options that could be configured, via `SmartAppBannerConfig` global Object.
+Default options are:
+
+```js
+var SmartAppBannerConfig = {
+			// Gets browser language for localization and set API to localized iTunes Stores
+			// Uses ISO country codes: http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+			locale: navigator.language.split('-')[1].toUpperCase(),
+			// Template selector
+			tplSelector: '[data-template=smartapp-banner]',
+			// Template location, must be an absolute path
+			tplDir: '',
+			// Show and hide the SmartAppBanner within animation
+			isAnimated: true,
+			// Shows price in view button instead of localized string
+			showPrice: true,
+			// Enables a custom iTunes Store link (commonly used for link tracking)
+			// viewURL: 'http://myCustomURL'
+			viewURL: false,
+			// Default (US) strings used in template
+			strings: {
+				appStoreClaim: 'On the App Store',
+				viewButton: 'view',
+				openButton: 'open'
+			},
+			// Spanish (ES) localized strings
+			strings_ES: {
+				appStoreClaim: 'En la App Store',
+				viewButton: 'ver',
+				openButton: 'abrir'
+			}
+		}
+```
+
+
 Live example
 ==============
 Access from an iOS device at http://meetsapp.github.io/SmartAppBanner/example.html
