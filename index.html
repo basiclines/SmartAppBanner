@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Smartappbanner by meetsapp</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Smartappbanner</h1>
+        <h2>iOS Smart App Banner polyfill based on web technologies</h2>
+        <a href="https://github.com/meetsapp/SmartAppBanner" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="smartappbanner" class="anchor" href="#smartappbanner"><span class="octicon octicon-link"></span></a>SmartAppBanner</h1>
+
+<p>iOS Smart App Banner polyfill based on web technologies
+<img src="http://meetsapp.github.io/SmartAppBanner/example.png" alt="Alt text" title="Smart App Banner"></p>
+
+<h1>
+<a name="why" class="anchor" href="#why"><span class="octicon octicon-link"></span></a>Why?</h1>
+
+<p>Native Smart App Banner for iOS is too limitated in certain aspects:</p>
+
+<ul>
+<li>Only works on Safari for iOS, not even Chrome for iOS</li>
+<li>Constantly buggy in each iOS7 update</li>
+<li>No customizable</li>
+<li>No parametrable</li>
+</ul><h1>
+<a name="how" class="anchor" href="#how"><span class="octicon octicon-link"></span></a>How?</h1>
+
+<p><strong>Live example</strong> (open from iOS device) <a href="http://meetsapp.github.io/SmartAppBanner/example.html">http://meetsapp.github.io/SmartAppBanner/example.html</a></p>
+
+<p>Uses <strong>iTunes affiliate API</strong> to provide all necesary information, full docs at:
+<a href="http://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html#searchexamples">http://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html#searchexamples</a></p>
+
+<p>Thanks to <a href="https://github.com/ijason" class="user-mention">@ijason</a> as i was inspired in their JS version
+<a href="https://github.com/ijason/Smart-App-Banners/blob/master/js/smart-app-banner.js">https://github.com/ijason/Smart-App-Banners/blob/master/js/smart-app-banner.js</a></p>
+
+<p>Also thanks to Adam Brace (<a href="http://dribbble.com/embracecreations">http://dribbble.com/embracecreations</a>) for creating an iOS7 Smart App Banner PSD in which i could insipire to create my own
+<a href="http://dribbble.com/shots/1329306-Smart-App-Banner-mockup-PSD">http://dribbble.com/shots/1329306-Smart-App-Banner-mockup-PSD</a></p>
+
+<h1>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>Add needed resources:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/smartapp-banner.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"js/smartapp-banner.min.js"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">async</span> <span class="na">defer</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>Remember <code>viewport metatag</code>:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, user-scalable=no"</span> <span class="nt">&gt;</span>
+</pre></div>
+
+<p>Then setup your SmartAppBanner <code>metatag</code>:</p>
+
+<p>View in App Store:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"apple-itunes-app-webversion"</span> <span class="na">content=</span><span class="s">"app-id=595441007"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<p>Open app with params:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"apple-itunes-app-webversion"</span> <span class="na">content=</span><span class="s">"app-id=595441007, app-argument=yourapp://yourparams"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<h1>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h1>
+
+<p>There are some options that could be configured, via <code>SmartAppBannerConfig</code> global Object.
+Default options are:</p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">SmartAppBannerConfig</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1">// Gets browser language for localization and set API to localized iTunes Stores</span>
+            <span class="c1">// Uses ISO country codes: http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2</span>
+            <span class="nx">locale</span><span class="o">:</span> <span class="nx">navigator</span><span class="p">.</span><span class="nx">language</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'-'</span><span class="p">)[</span><span class="mi">1</span><span class="p">].</span><span class="nx">toUpperCase</span><span class="p">(),</span>
+            <span class="c1">// Template selector</span>
+            <span class="nx">tplSelector</span><span class="o">:</span> <span class="s1">'[data-template=smartapp-banner]'</span><span class="p">,</span>
+            <span class="c1">// Template location, must be an absolute path</span>
+            <span class="nx">tplDir</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
+            <span class="c1">// Show and hide the SmartAppBanner within animation</span>
+            <span class="nx">isAnimated</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="c1">// Shows price in view button instead of localized string</span>
+            <span class="nx">showPrice</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="c1">// Enables a custom iTunes Store link (commonly used for link tracking)</span>
+            <span class="c1">// viewURL: 'http://myCustomURL'</span>
+            <span class="nx">viewURL</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="c1">// Default (US) strings used in template</span>
+            <span class="nx">strings</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">appStoreClaim</span><span class="o">:</span> <span class="s1">'On the App Store'</span><span class="p">,</span>
+                <span class="nx">viewButton</span><span class="o">:</span> <span class="s1">'view'</span><span class="p">,</span>
+                <span class="nx">openButton</span><span class="o">:</span> <span class="s1">'open'</span>
+            <span class="p">},</span>
+            <span class="c1">// Spanish (ES) localized strings</span>
+            <span class="nx">strings_ES</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">appStoreClaim</span><span class="o">:</span> <span class="s1">'En la App Store'</span><span class="p">,</span>
+                <span class="nx">viewButton</span><span class="o">:</span> <span class="s1">'ver'</span><span class="p">,</span>
+                <span class="nx">openButton</span><span class="o">:</span> <span class="s1">'abrir'</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+</pre></div>
+
+<h1>
+<a name="live-example" class="anchor" href="#live-example"><span class="octicon octicon-link"></span></a>Live example</h1>
+
+<p>Access from an iOS device at <a href="http://meetsapp.github.io/SmartAppBanner/example.html">http://meetsapp.github.io/SmartAppBanner/example.html</a></p>
+
+<h1>
+<a name="to-do" class="anchor" href="#to-do"><span class="octicon octicon-link"></span></a>To do</h1>
+
+<ul>
+<li>Create <code>dark</code> theme</li>
+<li>Check for app installed on device (?)</li>
+<li>Improve code</li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/meetsapp/SmartAppBanner/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/meetsapp/SmartAppBanner/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/meetsapp/SmartAppBanner"></a> is maintained by <a href="https://github.com/meetsapp">meetsapp</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
