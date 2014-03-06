@@ -48,7 +48,7 @@ Force both buttons (Download & Open):
 ```html
 <meta name="apple-itunes-app-webversion" content="app-id=595441007, app-argument=yourapp://yourparams">
 ```
-```js
+```html
 <script type="text/javascript" charset="utf-8" >
 	SmartAppBannerConfig = {
 		showDownload: true
