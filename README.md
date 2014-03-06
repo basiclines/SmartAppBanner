@@ -27,12 +27,6 @@ http://dribbble.com/shots/1329306-Smart-App-Banner-mockup-PSD
 
 Usage
 ==============
-Add needed resources:
-```html
-<link rel="stylesheet" href="css/smartapp-banner.min.css">
-<script type="text/javascript" src="js/smartapp-banner.min.js" charset="utf-8" async defer></script>
-```
-
 Remember `viewport metatag`:
 ```html
 <meta name="viewport" content="width=device-width, user-scalable=no" >
@@ -48,6 +42,24 @@ View in App Store:
 Open app with params:
 ```html
 <meta name="apple-itunes-app-webversion" content="app-id=595441007, app-argument=yourapp://yourparams">
+```
+
+Force both buttons (Download & Open):
+```html
+<meta name="apple-itunes-app-webversion" content="app-id=595441007, app-argument=yourapp://yourparams">
+```
+```js
+<script type="text/javascript" charset="utf-8" >
+	SmartAppBannerConfig = {
+		showDownload: true
+	}
+</script>
+```
+
+Add needed resources:
+```html
+<link rel="stylesheet" href="css/smartapp-banner.min.css">
+<script type="text/javascript" src="js/smartapp-banner.min.js" charset="utf-8" async defer></script>
 ```
 
 Options
@@ -71,6 +83,8 @@ var SmartAppBannerConfig = {
 			// Enables a custom iTunes Store link (commonly used for link tracking)
 			// viewURL: 'http://myCustomURL'
 			viewURL: false,
+			// Forces to show download button even when we declare the app-argument
+			showDownload: false,
 			// Default (US) strings used in template
 			strings: {
 				appStoreClaim: 'On the App Store',

@@ -76,9 +76,28 @@
 	.sab-icon_close:active { opacity: 0.8; }
 
 	/* Menu */
-	.sab-menu { float: right; margin: 0; padding: 0; }
-			.sab-menu ul { padding: 0; list-style: none; }
-			.sab-menu .sab-menu_item { margin: 18px 0 0; }
+	.sab-menu {
+		float: right;
+		margin: 0;
+		padding: 0;
+		white-space: nowrap;
+		font-size: 0/0 a;
+	}
+		.sab-menu:before {
+			content: "";
+			display: inline-block;
+			vertical-align: middle;
+			width: 1px;
+			height: 60px;
+		}
+		.sab-menu ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			display: inline-block;
+			vertical-align: middle;
+		}
+			.sab-menu .sab-menu_item { margin: 4px 0 0; white-space: normal; }
 
 	/* Action */
 	.sab-action {
@@ -98,8 +117,18 @@
 	.sab-action_view { border-color: #4cd964; color: #4cd964; }
 	.sab-action_open { border-color: #007aff; color: #007aff; }
 
+	/* Pressed states */
 	.sab-action:hover,
-	.sab-action:active { text-decoration: none; opacity: 0.6; }
+	.sab-action.sab-action_active,
+	.sab-action:active { text-decoration: none; color: #fff; }
+
+	.sab-action_view:hover,
+	.sab-action_view.sab-action_active,
+	.sab-action_view:active { background-color: #4cd964; }
+
+	.sab-action_open:hover,
+	.sab-action_open.sab-action_active,
+	.sab-action_open:active { background-color: #007aff; }
 
 	/* App Icon */
 	.sab-appicon {

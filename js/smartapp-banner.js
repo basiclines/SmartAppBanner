@@ -119,6 +119,8 @@
 			showPrice: true,
 			// Enables a custom iTunes Store link (commonly used for link tracking)
 			viewURL: false,
+			// Forces to show download button even when we declare the app-argument
+			showDownload: false,
 			// Default (US) strings used in template
 			strings: {
 				appStoreClaim: 'On the App Store',
@@ -257,6 +259,14 @@
 				var context = this;
 				var banner = document.body.querySelector(localConfig.tplSelector);
 
+				// Set pressed states
+				var menu = banner.querySelector('menu');
+				menu.addEventListener('touchstart', function(e) {
+					if (e.target.tagName.toLowerCase() == 'a') {
+						e.target.classList.add('sab-action_active');
+					}
+				})
+
 				// Hide banner from close icon
 				var closeButton = banner.querySelector('[data-trigger=close]');
 				closeButton.addEventListener('click', function(e) {
@@ -285,7 +295,7 @@
 					// Switch view/open
 					if (typeof info.openUrl == 'undefined') {
 						info.openNodeIsHidden = true;
-					} else {
+					} else if (!localConfig.showDownload) {
 						info.viewNodeIsHidden = true;
 					}
 
